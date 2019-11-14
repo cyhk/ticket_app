@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Ticket = require("../models/ticket");
 
-// get all tickets
+
+/**
+ * get all actions
+ * 
+ * Output: { tickets }
+ */
 router.get("/", async (req, res, next) => {
   try {
     const tickets = await Ticket.getAll();
@@ -15,7 +20,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// add a ticket
+/**
+ * Add a ticket
+ * Input (in request body): title, description, [status]
+ * Output: { ticket }
+ */
 router.post("/", async (req, res, next) => {
   try {
     const { title, description, status } = req.body;
@@ -29,7 +38,12 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// update ticket status (troubleshooting, in-progress, status)
+/**
+ * Update ticket status to troubleshooting, in-progress, or done
+ * 
+ * Input (in request body): status
+ * Output: { ticket }
+ */
 router.patch("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;

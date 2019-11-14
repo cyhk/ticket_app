@@ -70,7 +70,7 @@ class Action {
           SET action_status = $1
           WHERE action_id = $2
           RETURNING action_id, action_title, action_email,
-            action_name, action_status;
+            action_name, action_status, action_task_id;
       `,
       [action_status, action_id]
     );

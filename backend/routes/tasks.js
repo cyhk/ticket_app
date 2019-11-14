@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Task = require("../models/Task");
 
-// get all tasks
+
+/**
+ * get all actions
+ * 
+ * Output: { tasks }
+ */
 router.get("/", async (req, res, next) => {
   try {
     const tasks = await Task.getAll();
@@ -15,7 +20,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// add a task
+/**
+ * Add a task
+ * Input (in request body): title, description, [status], ticket_id
+ * Output: { task }
+ */
 router.post("/", async (req, res, next) => {
   try {
     const { title, description, status, ticket_id } = req.body;
@@ -29,7 +38,12 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// update task status (done or not done)
+/**
+ * Update task status to not-done, or done
+ * 
+ * Input (in request body): status
+ * Output: { task }
+ */
 router.patch("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;

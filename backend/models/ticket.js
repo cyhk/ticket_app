@@ -1,5 +1,6 @@
 const db = require("../db");
 const ExpressError = require("../helpers/expressError");
+const organizeTickets = require("../helpers/organizeTickets");
 
 class Ticket {
   /**
@@ -28,7 +29,9 @@ class Ticket {
       throw new ExpressError("There was problem getting the tickets");
     }
 
-    return tickets.rows;
+    const organizedTickets = organizeTickets(tickets.rows);
+
+    return organizedTickets;
   }
 
   /**

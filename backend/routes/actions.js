@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 const Action = require("../models/Action");
 
-// get all tasks for given ticket id
+
+/**
+ * get all actions
+ * 
+ * Output: { actions }
+ */
 router.get("/", async (req, res, next) => {
   try {
     const actions = await Action.getAll();
@@ -15,7 +20,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// add an action
+/**
+ * Add an action
+ * Input (in request body): title, email, name, [status], task_id
+ * Output: { action }
+ */
 router.post("/", async (req, res, next) => {
   try {
     const { title, email, name, status, task_id } = req.body;
@@ -30,8 +39,13 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// update action status (sourcing, confirming, 
-// in-progress, assessment, complete, cancelled)
+/**
+ * Update action status to sourcing, confirming, 
+ * in-progress, assessment, complete, or cancelled
+ * 
+ * Input (in request body): status
+ * Output: { action }
+ */
 router.patch("/:id", async (req, res, next) => {
   try {
     const id = req.params.id;

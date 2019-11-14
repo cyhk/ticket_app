@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AppContext from "./AppContext";
 
-function TicketForm({ addTicket }) {
+function TicketForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const { addTicket } = useContext(AppContext);
 
   function changeTitle(evt) {
     const newTitle = evt.target.value;

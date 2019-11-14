@@ -1,23 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
+import TaskList from "./TaskList";
+import AppContext from "./AppContext";
+import { Link } from 'react-router-dom';
 
-function Ticket({ id, title, description, done, changeDoneStatus }) {
-  function changeDone(evt) {
+/**
+ * Ticket: displays a task
+ * Props: id, title, description, status, tasks
+ */
+function Ticket({ id, title, description, status, tasks }) {
+  const { changeTicketStatus } = useContext(AppContext);
+
+  function handleChange(evt) {
     evt.preventDefault();
 
     const doneStatus = evt.target.value;
-    changeDoneStatus(id, doneStatus);
+    changeTicketStatus(id, doneStatus);
   }
 
   return (
     <li>
-      <div>Title: {title}</div>
-      <div>Description: {description || "None"}</div>
-
-      <select value={done} onChange={changeDone}>
+    <Link to={`/tickets/${id}`}>
+        <div>Title: {title}</div>
+        <div>Description: {description || "None"}</div>
+      </Link>
+      <select value={status} onChange={handleChange}>
         <option value="troubleshooting">Troubleshooting</option>
         <option value="in-progress">In progress</option>
         <option value="done">Done</option>
       </select>
+      {tasks && <TaskList tasks={tasks} />}
     </li>
   );
 }
