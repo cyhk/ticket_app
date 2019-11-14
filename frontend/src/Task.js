@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ActionList from "./ActionList";
 import AppContext from "./AppContext";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 /**
  * Task: displays a task
@@ -20,13 +20,13 @@ function Task({ id, title, description, status, actions }) {
     <li>
       <Link to={`/tasks/${id}`}>
         <div>{title}</div>
-        <div>{description}</div>
-        <input
-          type="checkbox"
-          checked={status === "done"}
-          onChange={handleChange}
-        />
       </Link>
+      <div>{description}</div>
+      <input
+        type="checkbox"
+        checked={status === "done"}
+        onChange={handleChange}
+      />
       {actions && <ActionList actions={actions} />}
     </li>
   );

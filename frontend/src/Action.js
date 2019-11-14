@@ -19,9 +19,9 @@ function Action({ id, title, email, name, status }) {
     <li>
       <Link to={`/actions/${id}`}>
         <div>{title}</div>
-        <div>{email}</div>
-        <div>{name}</div>
       </Link>
+      <div>{email}</div>
+      <div>{name}</div>
       <select value={status} onChange={handleChange}>
         <option value="sourcing">Sourcing</option>
         <option value="confirming">Confirming</option>

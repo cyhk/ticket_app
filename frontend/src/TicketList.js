@@ -3,8 +3,15 @@ import Ticket from "./Ticket";
 
 // TicketList: shows each ticket
 // Props: tickets (array)
-function TicketList({ tickets }) {
-  const [filter, setFilter] = useState("incomplete");
+function TicketList({ history, location, tickets }) {
+  const filter_choice = location.search;
+  const { pathname } = location;
+  const filter_query = filter_choice
+    ? filter_choice.split("=")[1]
+    : "incomplete";
+
+  console.log(filter_query)
+  const [filter, setFilter] = useState(filter_query);
   const [filteredTickets, setFilteredTickets] = useState(tickets);
 
   // set filter
@@ -13,6 +20,7 @@ function TicketList({ tickets }) {
 
     const newFilter = evt.target.value;
     setFilter(newFilter);
+    history.replace(`${pathname}?filter=${newFilter}`);
   }
 
   // whenever filter changes, update the filteredTasks according
@@ -38,6 +46,7 @@ function TicketList({ tickets }) {
       description={t.description}
       status={t.status}
       tasks={t.tasks}
+      location={location}
     />
   ));
 

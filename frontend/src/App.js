@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Route } from "react-router-dom";
 import Routes from "./Routes";
 import TicketList from "./TicketList";
 import AppContext from "./AppContext";
@@ -195,7 +196,7 @@ function App() {
         }}
       >
         <div className="App-left-half">
-          <TicketList tickets={tickets} />
+          <Route render={(rtProps) => <TicketList {...rtProps} tickets={tickets}/>} />
         </div>
         <div className="App-right-half">
           <Routes />
